@@ -1,6 +1,8 @@
 *.pyc
-*_old.py
 __pycache__
 .ipynb_checkpoints
-.vscode
 .DS_Store
+.env
+
+temp/
+.vscode/
