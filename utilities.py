@@ -606,7 +606,7 @@ def cumtrapz(y, x=None, dx=1.0, axis=-1, initial=None):
 def calc_orient(q_ref=np.r_[1,0,0,0],
                omega=np.zeros((5,3)),
                dt=np.ones(5)*0.005,
-               method='Integrate',
+               method='Integrate', # "Mahony", "Madgwick"
                acc=np.column_stack((np.zeros((5,2)), 9.7949*np.ones(5))),
                mag=None,
                nav='ENU'):
@@ -725,7 +725,7 @@ def calc_posvel(quat=np.r_[1,0,0,0],
         acc_space = signal.filtfilt(bl, al, acc_space.T).T
         
     if threshold:
-        acc_space[np.sum(acc_space**2,axis=1)<threshold] = 0.
+        acc_space[np.sum(acc_space**2,axis=1)<threshold**2] = 0.
     
     # acc_sensor = rotate_vector(acc_measured, quat)
     # if gravity_off:
