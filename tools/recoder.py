@@ -2,6 +2,8 @@ import csv
 import datetime
 import time
 import rospy
+import sys
+
 from sensor_msgs.msg import Imu
 
 
@@ -52,5 +54,9 @@ def read(csv_fn):
 
 
 if __name__ == "__main__":
-    imu_recorder = IMURecorder()
+    csv_fn = None
+    if len(sys.argv) == 2:
+        csv_fn = sys.argv[1]
+
+    imu_recorder = IMURecorder(csv_fn)
     rospy.spin()
